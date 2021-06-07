@@ -1,0 +1,65 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <%= render 'info', user: @user %>
+      <h2 class="mt-3">New book</h2>
+      <%= render 'books/form', book: @new_book %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+      <h2>Books</h2>
+      <%= render 'books/index',books: @user.books %>
+
+      <table class="table table-bordered">
+      <h2 style="font-weight: normal;">投稿数の前日比・前週比</h2>
+        <thead>
+          <th>今日の投稿数</th>
+          <th>昨日の投稿数</th>
+          <th>前日比</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= @user_today_books.count %>
+            </td>
+            <td>
+              <%= @user_yesterday_books.count %>
+            </td>
+            <td>
+              <% begin %>
+                <%= "#{((@user_today_books.count.to_f / @user_yesterday_books.count.to_f) * 100).to_i}" + "%" %>
+              <% rescue %>
+                <%= "0%" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-bordered">
+        <thead>
+          <th>今週の投稿数</th>
+          <th>先週の投稿数</th>
+          <th>前週比</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%=  @user_thisweek_books.count %>
+            </td>
+            <td>
+              <%= @user_lastweek_books.count %>
+            </td>
+            <td>
+              <% begin %>
+                <%= "#{((@user_thisweek_books.count.to_f / @user_lastweek_books.count.to_f) * 100).to_i}" + "%" %>
+              <% rescue %>
+                <%= "0%" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
