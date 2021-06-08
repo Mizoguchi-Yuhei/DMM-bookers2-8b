@@ -11,11 +11,15 @@
       <%= render 'books/index',books: @user.books %>
 
       <table class="table table-bordered">
-      <h2 style="font-weight: normal;">投稿数の前日比・前週比</h2>
+      <h3 style="font-weight: normal;">7日間分の投稿数</h3>
         <thead>
-          <th>今日の投稿数</th>
-          <th>昨日の投稿数</th>
-          <th>前日比</th>
+          <th>6日前</th>
+          <th>5日前</th>
+          <th>4日前</th>
+          <th>3日前</th>
+          <th>2日前</th>
+          <th>1日前</th>
+          <th>今日</th>
         </thead>
         <tbody>
           <tr>
@@ -26,40 +30,24 @@
               <%= @user_yesterday_books.count %>
             </td>
             <td>
-              <% begin %>
-                <%= "#{((@user_today_books.count.to_f / @user_yesterday_books.count.to_f) * 100).to_i}" + "%" %>
-              <% rescue %>
-                <%= "0%" %>
-              <% end %>
+              <%= @user_twodaysago_books.count %>
+            </td>
+            <td>
+              <%= @user_threedaysago_books.count %>
+            </td>
+            <td>
+              <%= @user_fourdaysago_books.count %>
+            </td>
+            <td>
+              <%= @user_fivedaysago_books.count %>
+            </td>
+            <td>
+              <%= @user_sixdaysago_books.count %>
             </td>
           </tr>
         </tbody>
       </table>
 
-      <table class="table table-bordered">
-        <thead>
-          <th>今週の投稿数</th>
-          <th>先週の投稿数</th>
-          <th>前週比</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <%=  @user_thisweek_books.count %>
-            </td>
-            <td>
-              <%= @user_lastweek_books.count %>
-            </td>
-            <td>
-              <% begin %>
-                <%= "#{((@user_thisweek_books.count.to_f / @user_lastweek_books.count.to_f) * 100).to_i}" + "%" %>
-              <% rescue %>
-                <%= "0%" %>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>
