@@ -48,6 +48,36 @@
         </tbody>
       </table>
 
+      <p style="text-align: center;">7日間の投稿数の比較</p>
+      <div>
+        <% data = {
+           labels: ["6日前", "5日前", "4日前", "3日前", "2日前", "1日前", "今日"],
+            datasets: [{
+                    label: '投稿した本の数',
+                    backgroundColor: 'rgba(102,255,129,0)',
+                    borderColor: 'blue',
+                    data: [@user_sixdaysago_books.count,
+                          @user_fivedaysago_books.count,
+                          @user_fourdaysago_books.count,
+                          @user_threedaysago_books.count,
+                          @user_twodaysago_books.count,
+                          @user_yesterday_books.count,
+                          @user_today_books.count]
+                          }]
+        }
+        options = {
+          width: 200,
+          height: 100,
+            yAxes: [
+              ticks: {
+                min: 0, max: 10, stepSize: 1
+              }
+            ]
+        }
+        %>
+        <%= line_chart data, options %>
+      </div>
+
     </div>
   </div>
 </div>
